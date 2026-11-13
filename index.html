@@ -1,0 +1,2092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio</title>
+<link rel="icon" type="image/png" href="favicon.ico">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+:root {
+  --sapphire-dark: #082567;
+  --sapphire: #0f52ba;
+  --amethyst: #9966cc;
+  --emerald: #50c878;
+  --diamond: #e6f7ff;
+  --mulberry: #770737;
+
+  --bg-day: linear-gradient(to right, #9bb4cd, #87ceeb, #eeeed6);
+  --bg-night: linear-gradient(to right, #2c5c8b, #3e7ba6, #969681);
+  --bg-reading: linear-gradient(to right, #b8cbe0, #a1cbe0, #fff2cc);
+}
+
+body {
+  background: var(--bg-day);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  transition: background 1s ease-in-out;
+}
+
+
+.navbar {
+      position: sticky;
+      top: 20px;
+      margin: 0 auto;
+      border-radius: 20px;
+      padding: 10px 40px;
+      width: 90%;
+      max-width: 1100px;
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      overflow: visible;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+      background: rgba(233, 233, 209, 0.35); 
+      backdrop-filter: blur(15px);
+      box-shadow:inset 2px 2px 5px rgba(255, 255, 255, 0.8), inset -2px -2px 6px rgba(0, 0, 0, 0.15), 0 4px 20px rgba(0, 0, 0, 0.1);             
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .navbar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 2px;
+      background: linear-gradient(90deg, var(--sapphire-dark), var(--amethyst), var(--emerald), var(--diamond), var(--mulberry), var(--sapphire-dark));
+      background-size: 400% 400%;
+      animation: neonFlow 6s linear infinite;
+      z-index: 1;
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+
+    @keyframes neonFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .navbar > .container-fluid { position: relative; z-index: 5; }
+
+    .navbar-brand {
+      font-size: 2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: baseline;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand .port {
+      -webkit-text-stroke: 1.2px var(--sapphire-dark);
+      color: transparent;
+      margin-right: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand .folio {
+      color: var(--sapphire-dark);
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand:hover .port {
+      -webkit-text-stroke: 1.2px var(--amethyst);
+      text-shadow: 0 0 6px var(--amethyst);
+    }
+
+    .navbar-brand:hover .folio {
+      color: var(--amethyst);
+      text-shadow: 0 0 8px var(--amethyst);
+    }
+
+    .navbar-nav .nav-link {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--sapphire-dark);
+      margin-left: 1.2rem;
+      position: relative;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .navbar-nav .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -3px;
+      width: 0%;
+      height: 2px;
+      background: var(--amethyst);
+      box-shadow: 0 0 6px var(--amethyst);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .navbar-nav .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: var(--amethyst);
+      text-shadow: 0 0 8px var(--amethyst);
+    }
+
+    .navbar-nav .nav-link.active {
+      color: var(--amethyst);
+      text-shadow: 0 0 6px var(--amethyst);
+    }
+
+.mode-toggle {
+  font-size: 1.8rem;
+  color: var(--sapphire);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+}
+
+.mode-toggle:hover {
+  color: var(--amethyst);
+  text-shadow: 0 0 8px var(--amethyst);
+  transform: rotate(90deg);
+}
+
+.mode-box {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 15px;
+  backdrop-filter: blur(15px);
+  padding: 10px 15px;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 9999;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.mode-box button {
+  background: transparent;
+  border: none;
+  color: var(--sapphire);
+  font-weight: 600;
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+
+#home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 200px 8% 80px 8%;
+  color: var(--sapphire-dark);
+}
+
+.home-text {
+  flex: 1 1 45%;
+}
+
+.home-text h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.typing {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--amethyst);
+  border-right: 3px solid var(--amethyst);
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.home-text p {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  color: var(--sapphire-dark);
+}
+
+.btn-project {
+  margin-top: 25px;
+  padding: 10px 25px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--sapphire-dark);
+  border: 2px solid var(--sapphire-dark);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+}
+
+.btn-project i {
+  margin-left: 6px;
+  color: var(--sapphire-dark);
+}
+
+.btn-project:hover {
+  background: var(--amethyst);
+  color: var(--diamond);
+  border-color: var(--amethyst);
+  box-shadow: 0 0 10px var(--amethyst);
+}
+
+.home-photo {
+  flex: 1 1 45%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo-circle {
+  width: 180px;           
+  height: 180px;         
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #fff; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .photo-circle {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+@media (max-width: 480px) {
+  .photo-circle {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+
+
+.orbit-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
+}
+
+.planet {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+.orbit1 { animation: rotate1 12s linear infinite; }
+.orbit2 { animation: rotate2 18s linear infinite; }
+.orbit3 { animation: rotate3 22s linear infinite; }
+
+@keyframes rotate1 { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes rotate2 { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes rotate3 { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+.orbit1 .planet1 { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+.orbit1 .planet2 { transform: rotate(180deg) translateX(150px) rotate(-180deg); }
+.orbit2 .planet1 { transform: rotate(0deg) translateX(200px) rotate(0deg); }
+.orbit2 .planet2 { transform: rotate(120deg) translateX(200px) rotate(-120deg); }
+.orbit3 .planet1 { transform: rotate(0deg) translateX(250px) rotate(0deg); }
+.orbit3 .planet2 { transform: rotate(180deg) translateX(250px) rotate(-180deg); }
+
+@media (max-width: 992px) {
+  #home { flex-direction: column-reverse; text-align: center; }
+  .home-text { flex: 1 1 100%; margin-top: 30px; }
+  .home-photo { flex: 1 1 100%; margin-bottom: 50px; }
+}
+
+#about {
+  min-height: 100vh;
+  padding: 120px 8%;
+  background: transparent;
+  color: var(--sapphire-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-title {
+  font-size: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+
+  color: transparent;
+  -webkit-text-stroke: 2px var(--sapphire);
+
+  position: relative;
+  display: inline-block; 
+  overflow: hidden;
+  margin: 80px auto 50px; 
+}
+
+.about-title-wrapper {
+  text-align: center; 
+}
+
+.about-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;           
+  width: 100%;           
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(186, 85, 211, 0.4),
+    transparent
+  );
+  animation: title-glow 2s infinite linear;
+}
+
+@keyframes title-glow {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.about-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1100px;
+  gap: 40px;
+  margin-bottom: 70px;
+}
+
+.about-text {
+  flex: 1 1 45%;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  text-align: justify;
+  animation: fadeUp 1s ease forwards;
+  opacity: 0;
+}
+
+.about-photo {
+  flex: 1 1 45%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.oval-bg {
+  width: 250px;
+  height: 340px;
+  background: var(--sapphire-dark);
+  border-radius: 50% / 45%;
+  position: absolute;
+  animation: waveMove 6s ease-in-out infinite alternate;
+  box-shadow:
+    inset 4px 4px 10px rgba(255,255,255,0.3),
+    inset -4px -4px 10px rgba(0,0,0,0.4);
+}
+
+.oval-border {
+  width: 270px;
+  height: 360px;
+  border-radius: 50% / 45%;
+  border: 3px solid var(--sapphire-dark);
+  position: absolute;
+  z-index: 5;
+  opacity: 0.9;
+}
+
+.about-img {
+  width: 220px;
+  height: 300px;
+  border-radius: 50% / 45%;
+  object-fit: cover;
+  position: relative;
+  z-index: 10;
+  opacity: 0.95;
+}
+
+@keyframes waveMove {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(10px); }
+  100% { transform: translateY(0px); }
+}
+
+.about-stats {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.stat-box {
+  flex: 1 1 300px;
+  background: rgba(15, 82, 186, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px 25px;
+  text-align: center;
+  box-shadow:
+    inset 2px 2px 6px rgba(255,255,255,0.6),
+    inset -3px -3px 6px rgba(0,0,0,0.15);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.stat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--sapphire-dark);
+}
+
+.stat-box h4 {
+  margin-bottom: 6px;
+  color: var(--amethyst);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.stat-box p {
+  font-size: 0.95rem;
+  color: var(--sapphire-dark);
+}
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.about-container {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease-out;
+}
+
+.about-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#skills {
+  min-height: 100vh;
+  padding: 120px 8%;
+  background: transparent;
+  color: var(--sapphire-dark);
+  text-align: center;
+}
+
+.skills-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 35px;
+  margin-bottom: 70px;
+}
+
+.tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.tech-item img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255,255,240,0.3);
+  padding: 15px;
+  box-shadow: inset 3px 3px 6px rgba(255,255,255,0.5),
+              inset -3px -3px 6px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.tech-item:hover {
+  transform: translateY(-8px);
+}
+
+.tech-name {
+  margin-top: 10px;
+  border: none;
+  background: rgba(255,255,240,0.3);
+  backdrop-filter: blur(10px);
+  color: var(--sapphire-dark);
+  font-weight: 600;
+  border-radius: 15px;
+  padding: 6px 16px;
+  box-shadow: inset 1px 1px 3px rgba(255,255,255,0.4),
+              inset -1px -1px 3px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.tech-info-box {
+  position: fixed;
+  bottom: 60px;
+  right: 60px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 20px 25px;
+  color: var(--sapphire-dark);
+  box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  width: 300px;
+  display: none;
+  animation: fadeUp 0.6s ease;
+  z-index: 999;
+}
+
+.tech-info-box h4 {
+  color: var(--amethyst);
+  margin-bottom: 8px;
+}
+
+.edu-exp-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 100px;
+  flex-wrap: wrap;
+}
+
+.education, .experience {
+  flex: 1 1 45%;
+  text-align: left;
+}
+
+.education h3, .experience h3 {
+  font-size: 2rem;
+  color: var(--amethyst);
+  margin-bottom: 20px;
+}
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.edu-card {
+  background: rgba(255,255,240,0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  text-align: center;
+  padding: 15px;
+  box-shadow: inset 2px 2px 6px rgba(255,255,255,0.4),
+              inset -2px -2px 6px rgba(0,0,0,0.2);
+}
+
+.edu-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.experience ul {
+  list-style: disc;
+  padding-left: 25px;
+  line-height: 1.7;
+}
+
+.separator {
+  width: 6px;
+  background: linear-gradient(var(--sapphire-dark), var(--amethyst));
+  border-radius: 10px;
+  flex-shrink: 0;
+  height: auto;
+  align-self: stretch; 
+  position: relative;
+  overflow: hidden;
+}
+
+.separator .shine {
+  width: 8px;
+  height: 15px;
+  background: var(--diamond);
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: -1px;
+  animation: shineMove 3s linear infinite;
+}
+
+@keyframes shineMove {
+  0% { top: 0; }
+  50% { top: calc(100% - 15px); }
+  100% { top: 0; }
+}
+
+#certificates {
+  padding: 100px 8% 120px;
+  text-align: center;
+  background: transparent;
+}
+
+.certificates-gallery {
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--amethyst) rgba(255, 255, 255, 0.2);
+}
+
+.certificates-gallery::-webkit-scrollbar {
+  height: 8px;
+}
+.certificates-gallery::-webkit-scrollbar-thumb {
+  background: var(--amethyst);
+  border-radius: 10px;
+}
+.certificates-gallery::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.certificate-card {
+  min-width: 340px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 240, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: inset 2px 2px 6px rgba(255, 255, 255, 0.7),
+              inset -2px -2px 8px rgba(0, 0, 0, 0.15),
+              0 6px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  scroll-snap-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.certificate-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(153, 102, 204, 0.4);
+}
+
+.certificate-card img {
+  width: 100%;     
+  height: 200px;  
+  object-fit: cover; 
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.certificate-card h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--sapphire-dark);
+  margin-bottom: 5px;
+}
+
+.certificate-card p {
+  font-size: 0.95rem;
+  color: var(--amethyst);
+}
+
+#projects {
+  padding: 100px 8% 120px;
+  text-align: center;
+}
+
+.project-card {
+  perspective: 1200px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%; 
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+  border-radius: 20px;
+}
+
+.project-card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15), inset 2px 2px 6px rgba(255,255,255,0.3);
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-back {
+  background: rgba(255,255,240,0.35);
+  backdrop-filter: blur(10px);
+  color: var(--sapphire-dark);
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+}
+
+.card-back h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.card-back p {
+  font-size: 1rem;
+  color: var(--amethyst);
+}
+
+.card-back .tech-icons {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.card-back .tech-icons img {
+  width: 35px;
+  height: 35px;
+}
+
+.btn-view {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: rgba(153,102,204,0.6);
+  color: ivory;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-view:hover {
+  background: var(--amethyst);
+  color: var(--diamond);
+  box-shadow: 0 0 10px var(--amethyst);
+}
+
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  grid-auto-rows: 400px;
+  gap: 40px;
+}
+
+@media (max-width: 992px) { 
+  .projects-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .card-back h3 {
+    font-size: 1.2rem;
+  }
+  .card-back p {
+    font-size: 0.95rem;
+  }
+  .card-back .tech-icons img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 576px) { 
+  .projects-container {
+    grid-template-columns: 1fr;
+  }
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.service-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  position: relative;
+}
+
+.service-photo {
+  flex: 0 0 40%;
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+}
+
+.service-photo img {
+  width: 100%;
+  display: block;
+  border-radius: 15px;
+  transform: translateZ(0);
+  box-shadow: inset 3px 3px 10px rgba(255,255,255,0.3),
+              inset -3px -3px 10px rgba(0,0,0,0.2);
+}
+
+.photo-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.learn-more-btn {
+  background: rgba(15, 82, 186, 0.4);
+  backdrop-filter: blur(5px); 
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.service-info {
+  flex: 0 0 55%;
+  background: rgba(255,255,240,0.7);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: inset 3px 3px 10px rgba(0,82,204,0.2),
+              inset -3px -3px 10px rgba(255,255,255,0.5);
+  transform: translateX(-50px);
+  opacity: 0;
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.service-info:target {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.course-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.course-price {
+  background: rgba(0,82,204,0.2);
+  padding: 5px 10px;
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+}
+
+.advance-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 8px 16px;
+  background: rgba(15, 82, 186, 0.5);
+  backdrop-filter: blur(5px);
+  color: #fff;
+  border-radius: 10px;
+  text-decoration: none;
+  backdrop-filter: blur(5px);
+}
+
+.advance-btn:hover {
+  background: rgb(7, 53, 122);
+}
+
+@media (max-width: 900px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .service-item {
+    flex-direction: column;
+  }
+  .service-photo, .service-info {
+    flex: 1 1 100%;
+  }
+}
+
+.testimonial-box {
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  padding: 20px;
+  background: #fff;
+}
+
+.testimonial-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.testimonial-title {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.comment-icon {
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+.add-testimonial-btn button {
+  background: rgba(0,82,204,0.8);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+}
+
+.add-testimonial-btn button:hover {
+  background: rgba(0,82,204,1);
+}
+
+.testimonial-list {
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.testimonial-item {
+  position: relative;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+}
+
+.testimonial-item .quote {
+  font-size: 2rem;
+  color: #0f52ba;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.testimonial-text {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.testimonial-rating {
+  color: gold;
+  margin-bottom: 10px;
+}
+
+.testimonial-account {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: #0f52ba;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.account-info .name {
+  font-weight: 600;
+}
+
+.account-info .position {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #ff4d4d;
+  transition: transform 0.2s;
+}
+.delete-btn:hover {
+  transform: scale(1.2);
+}
+
+.add-testimonial-popup {
+  display: none; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.add-testimonial-content {
+  background: rgba(255,255,255,0.95);
+  padding: 30px;
+  border-radius: 15px;
+  width: 400px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.add-testimonial-content h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.add-testimonial-content form input,
+.add-testimonial-content form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.add-testimonial-content form textarea {
+  resize: none;
+  height: 100px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-buttons button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.form-buttons button[type="submit"] {
+  background: rgba(0,82,204,0.8);
+  color: #fff;
+}
+
+.form-buttons button[type="submit"]:hover {
+  background: rgba(0,82,204,1);
+}
+
+.form-buttons button[type="button"] {
+  background: #ccc;
+}
+
+.contact-section {
+  margin: 60px 60px;
+  text-align: center;
+}
+
+@media (min-width: 1300px) {
+  .contact-section {
+    margin-left: 120px;
+    margin-right: 120px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-section {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+.contact-subtitle {
+  font-size: 0.95rem;
+  margin-top: -10px;
+  margin-bottom: 40px;
+  opacity: 0.8;
+}
+
+.contact-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.contact-left {
+  flex: 1 1 300px;
+}
+
+.profile-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;   
+  margin-left: 15px;          
+}
+
+.contact-photo {
+    width: 150px;         
+    height: 150px;         
+    border-radius: 50%;    
+    object-fit: cover;     
+    display: block;
+    margin: 15px;  
+    border: 3px solid #fff; 
+}
+
+@media (max-width: 600px) {
+  .contact-photo {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+
+.contact-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: left;
+}
+
+.contact-position {
+  font-size: 0.95rem;
+  color: #555;
+  margin: 5px 0 20px 0;
+  text-align: left;          
+}
+
+.info-box {
+  display: flex;
+  align-items: center;       
+  gap: 20px;                
+  padding: 12px 15px;
+  margin-bottom: 12px;
+  margin-left: 15px;
+  background: rgba(116, 156, 236, 0.28);
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+}
+
+.info-icon {
+  font-size: 20px;         
+  color: #0F52BA;
+  flex-shrink: 0;
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;    
+  justify-content: center;   
+}
+
+.info-text h4 {
+  margin: 0;
+  font-size: 1rem;          
+  font-weight: bold;
+  line-height: 1.1;         
+}
+
+.info-text p {
+  margin: 0;
+  font-size: 0.9rem;       
+  color: #444;
+  line-height: 1.1;         
+}
+
+.contact-right {
+  flex: 1 1 380px;
+  max-width: 520px;
+  display: flex;
+  justify-content: center;
+}
+
+.form-main-box {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(116, 156, 236, 0.28);
+  padding: 30px;
+  border-radius: 15px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 650px) {
+  .form-main-box {
+    padding: 20px;
+    max-width: 100%;
+  }
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 2px solid #cfd5e4;
+  background: #ffffffbd;
+  font-size: 1rem;
+}
+
+.btn-3d {
+  width: 100%;
+  padding: 12px;
+  background: #0F52BA;
+  color: #fff;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 4px 4px 10px #9bb0d9,
+              -4px -4px 10px #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-3d:hover {
+  box-shadow: inset 4px 4px 10px #92a8d6,
+              inset -4px -4px 10px #ffffff;
+}
+
+.footer {
+  background-color: #0d1f5a;
+  color: #fff;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.social-link {
+  color: #fff;
+  font-size: 1.5rem; 
+  transition: transform 0.3s, color 0.3s;
+  text-decoration: none; 
+}
+
+.social-link:hover {
+  transform: scale(1.2); 
+  color: #4a81ff;        
+}
+
+.footer-text {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+</style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      <a class="navbar-brand" href="#home"><span class="port">PORT</span><span class="folio">folio</span></a>
+      <div class="d-flex align-items-center position-relative">
+        <ul class="navbar-nav me-3 mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="#about">About Me</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#testimonial">Testimonials</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+
+      <i class="bi bi-gear mode-toggle" id="modeToggle"></i>
+
+
+      <div class="mode-box" id="modeBox">
+        <button id="dayMode">🌞 Day Mode</button>
+        <button id="nightMode">🌙 Night Mode</button>
+        <button id="readingMode">📖 Reading Mode</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section id="home">
+  <div class="home-text">
+    <h2>Hello, I am <strong>Hnin Yadanar Aung</strong></h2>
+    <div class="typing" id="typingText"></div>
+    <p>Code with Logic, Design with Heart.</p>
+    <a href="#projects" class="btn-project">Projects <i class="bi bi-box-arrow-up-right"></i></a>
+  </div>
+
+  <div class="home-photo">
+    <div class="photo-circle">
+       <img src="snowy_girly_panda.jpg" alt="Your Photo">
+    </div>
+    <div class="orbit-container">
+      <div class="orbit orbit1">
+        <div class="planet planet1" style="background:#f0db4f; color:#000;"><i class="fab fa-js"></i></div>
+        <div class="planet planet2" style="background:#e34c26;"><i class="fab fa-html5"></i></div>
+      </div>
+      <div class="orbit orbit2">
+        <div class="planet planet1" style="background:#264de4;"><i class="fab fa-css3-alt"></i></div>
+        <div class="planet planet2" style="background:#7952b3;"><i class="fab fa-bootstrap"></i></div>
+      </div>
+      <div class="orbit orbit3">
+        <div class="planet planet1" style="background:#a8d5ba;"><i class="fas fa-code"></i></div>
+        <div class="planet planet2" style="background:#ff6f61;"><i class="fas fa-terminal"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-container">
+    <div class="about-title-wrapper">
+      <h2 class="about-title">About Me</h2>
+    </div>
+
+    <div class="about-content">
+      <div class="about-text">
+        <p>
+          I am <strong>Hnin Yadanar Aung</strong>, a passionate web developer who turns imagination into interactive experiences. 
+          I love blending logic and creativity — building responsive, user-friendly websites with clean design and efficient code. 
+          Every project I create is crafted with attention to detail, aiming to deliver both elegance and function.
+        </p>
+      </div>
+
+      <div class="about-photo">
+        <div class="oval-bg"></div>
+        <div class="oval-border"></div>
+        <img src="happy_dreamcatcher.jpg" alt="About Me Photo" class="about-img">
+      </div>
+    </div>
+
+
+    <div class="about-stats">
+      <div class="stat-box">
+        <div class="stat-top">
+          <i class="fas fa-code"></i>
+          <span>3</span>
+        </div>
+        <h4>TOTAL PROJECTS</h4>
+        <p>Code. Create. Inspire.</p>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-top">
+          <i class="fas fa-award"></i>
+          <span>5</span>
+        </div>
+        <h4>CERTIFICATES</h4>
+        <p>Every milestone builds expertise.</p>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-top">
+          <i class="fas fa-globe"></i>
+          <span>2</span>
+        </div>
+        <h4>YEARS OF EXPERIENCE</h4>
+        <p>Learning endlessly, growing consistently.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="skills-container">
+    <h2 class="about-title">MY TECH STACK</h2>
+
+    <div class="skills-icons">
+      <div class="tech-item" data-tech="html">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+        <button class="tech-name">HTML</button>
+      </div>
+
+      <div class="tech-item" data-tech="css">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
+        <button class="tech-name">CSS</button>
+      </div>
+
+      <div class="tech-item" data-tech="js">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+        <button class="tech-name">JavaScript</button>
+      </div>
+
+      <div class="tech-item" data-tech="bootstrap">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap">
+        <button class="tech-name">Bootstrap</button>
+      </div>
+
+      <div class="tech-item" data-tech="c">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C">
+        <button class="tech-name">C</button>
+      </div>
+
+      <div class="tech-item" data-tech="cpp">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+        <button class="tech-name">C++</button>
+      </div>
+
+      <div class="tech-item" data-tech="csharp">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#">
+        <button class="tech-name">C#</button>
+      </div>
+
+      <div class="tech-item" data-tech="python">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+        <button class="tech-name">Python</button>
+      </div>
+
+      <div class="tech-item" data-tech="xampp">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" alt="XAMPP">
+        <button class="tech-name">XAMPP</button>
+      </div>
+
+      <div class="tech-item" data-tech="php">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
+        <button class="tech-name">PHP</button>
+      </div>
+    </div>
+
+    <div class="tech-info-box" id="techInfoBox">
+      <h4 id="techTitle"></h4>
+      <p id="techDesc"></p>
+    </div>
+  </div>
+
+  <div class="edu-exp-container">
+    <div class="education">
+      <h3>EDUCATION</h3>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <img src="Pinma.png" alt="School Logo">
+          <h5 style="font-size: 30px; font-weight: bold;">Pinma</h5>
+          <p>Building a solid foundation in critical thinking, discipline, and teamwork through various school activities and coursework.</p>
+        </div>
+
+        <div class="edu-card">
+          <img src="MIIT.png" alt="University Logo">
+          <h5 style="font-size: 30px; font-weight: bold;">MIIT</h5>
+          <p>Studied Computer Science — foundation in programming, data structures, and problem solving.</p>
+        </div>
+
+        <div class="edu-card">
+          <img src="edX.png" alt="edX course">
+          <h5 style="font-size: 30px; font-weight: bold;">edX</h5>
+          <p>Completed modern web development and design principles through online learning.</p>
+        </div>
+
+        <div class="edu-card">
+          <img src="cisco.png" alt="Cisco Logo">
+          <h5 style="font-size: 30px; font-weight: bold;">Cisco</h5>
+          <p>Focused on backend logic, database connection, and real-world app deployment.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="separator">
+      <div class="line"></div>
+      <div class="shine"></div>
+    </div>
+
+    <div class="experience">
+      <h3>WORK EXPERIENCE</h3>
+      <ul>
+        <li><strong>Front-End Developer</strong> at Creative Dev Studio — Built responsive landing pages and animations.</li>
+        <li><strong>Freelance Web Designer</strong> — Designed UI for clients with focus on elegance and usability.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="certificates">
+  <h2 class="about-title">CERTIFICATES</h2>
+
+  <div class="certificates-gallery">
+    <div class="certificate-card">
+      <img src="DataScience_certificate.jpg" alt="Certificate 1">
+    </div>
+
+    <div class="certificate-card">
+      <img src="Hackathon_certificate.jpg" alt="Certificate 2">
+    </div>
+
+    <div class="certificate-card">
+      <img src="India_certificate.jpg" alt="Certificate 3">
+    </div>
+
+    <div class="certificate-card">
+      <img src="WEB_cetificate.jpg" alt="Certificate 4">
+    </div>
+
+    <div class="certificate-card">
+      <img src="ICT_certificate.jpg" alt="Certificate 5">
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2 class="about-title">PROJECTS SHOWCASE</h2>
+
+  <div class="projects-container">
+    <div class="project-card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="lyravine_ss.png" alt="Project 1">
+        </div>
+        <div class="card-back">
+          <h3>Layavine</h3>
+          <p>This website showcases OSTs from Chinese dramas, to explore songs by drama, singer, or genre. So, fans easily discover and enjoy their favorite drama music.</p>
+          <div class="tech-icons">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
+          </div>
+          <a href="https://hnin135.github.io/Lyravine.ost/index.html" class="btn-view" target="_blank">View Project</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="audrey_ss.png" alt="Project 2">
+        </div>
+        <div class="card-back">
+          <h3>Audrey.com</h3>
+          <p>This website is an online clothing store offering a wide range of fashion items for all styles. Users can browse by viewing detailed product information,make purchases and secure shopping experience.</p>
+          <div class="tech-icons">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap">
+          </div>
+          <a href="https://hnin135.github.io/audrey/" class="btn-view" target="_blank">View Project</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="foodie_ss.png" alt="Project 2">
+        </div>
+        <div class="card-back">
+          <h3>Foodie_Paradise</h3>
+          <p>This website is a platform for food lovers to explore recipes, restaurant reviews, and culinary trends.</p>
+          
+          <div class="tech-icons">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap">
+          </div>
+          <a href="file:///D:/Summit%20Myanmar%20Files(1st%20yr)/Web%20Lessons%20coding/Homework/WireFrame.html" class="btn-view" target="_blank">View Project</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services-section" style="padding:60px 20px;">
+  <div class="about-title-wrapper">
+      <h2 class="about-title" style="text-align:center; margin-bottom:50px;">SERVICES</h2>
+    </div>
+
+  <div class="services-grid">
+    <div class="service-item">
+      <div class="service-photo">
+        <img src="UIUX_Web_Design.jpg" alt="UI/UX Web Design" />
+        <div class="photo-overlay">
+          <span class="service-name">UI/UX Web Design</span>
+          <a href="#service1" class="learn-more-btn">Learn More</a>
+        </div>
+      </div>
+      <div id="service1" class="service-info">
+        <h3 class="course-title">UI/UX Web Design <span class="course-price">$199</span></h3>
+        <p class="course-desc">Learn the essentials of modern web design with hands-on UI/UX projects.</p>
+        <h4>What you'll learn:</h4>
+        <ul>
+          <li>User-centered design principles</li>
+          <li>Wireframing and prototyping</li>
+          <li>Responsive design techniques</li>
+        </ul>
+        <p class="course-duration">Duration: 3 months, 1-2 hours/week</p>
+        <a href="signin.html" class="advance-btn">Advance Your Career</a>
+      </div>
+    </div>
+
+    <div class="service-item">
+      <div class="service-photo">
+        <img src="Computer_Science_For_Web_Programming.jpg" alt="Computer Science For Web Programming" />
+        <div class="photo-overlay">
+          <span class="service-name">Computer Science For Web Programming</span>
+          <a href="#service2" class="learn-more-btn">Learn More</a>
+        </div>
+      </div>
+      <div id="service2" class="service-info">
+        <h3 class="course-title">Computer Science For Web Programming <span class="course-price">$249</span></h3>
+        <p class="course-desc">Master programming concepts and backend logic for web development.</p>
+        <h4>What you'll learn:</h4>
+        <ul>
+          <li>Algorithms & data structures</li>
+          <li>Backend development fundamentals</li>
+          <li>Database integration</li>
+        </ul>
+        <p class="course-duration">Duration: 4 months, 2 hours/week</p>
+        <a href="signin.html" class="advance-btn">Advance Your Career</a>
+      </div>
+    </div>
+
+    <div class="service-item">
+      <div class="service-photo">
+        <img src="Web_App_Development_For_Data_Scientists.jpg" alt="Web App Development For Data Scientists" />
+        <div class="photo-overlay">
+          <span class="service-name">Web App Development For Data Scientists</span>
+          <a href="#service3" class="learn-more-btn">Learn More</a>
+        </div>
+      </div>
+      <div id="service3" class="service-info">
+        <h3 class="course-title">Web App Development For Data Scientists <span class="course-price">$299</span></h3>
+        <p class="course-desc">Learn to build web applications to analyze and visualize data.</p>
+        <h4>What you'll learn:</h4>
+        <ul>
+          <li>Frontend & backend integration</li>
+          <li>Data visualization with web tools</li>
+          <li>Deploying web apps</li>
+        </ul>
+        <p class="course-duration">Duration: 3 months, 1-2 hours/week</p>
+        <a href="signin.html" class="advance-btn">Advance Your Career</a>
+      </div>
+    </div>
+
+    <div class="service-item">
+      <div class="service-photo">
+        <img src="Introduction_To_Web_Accessibility.jpg" alt="Introduction To Web Accessibility" />
+        <div class="photo-overlay">
+          <span class="service-name">Introduction To Web Accessibility</span>
+          <a href="#service4" class="learn-more-btn">Learn More</a>
+        </div>
+      </div>
+      <div id="service4" class="service-info">
+        <h3 class="course-title">Introduction To Web Accessibility <span class="course-price">$149</span></h3>
+        <p class="course-desc">Make your websites accessible to all users, including those with disabilities.</p>
+        <h4>What you'll learn:</h4>
+        <ul>
+          <li>Accessibility standards</li>
+          <li>Screen readers & ARIA roles</li>
+          <li>Testing accessible websites</li>
+        </ul>
+        <p class="course-duration">Duration: 2 months, 1 hour/week</p>
+        <a href="signin.html" class="advance-btn">Advance Your Career</a>
+      </div>
+    </div>
+
+    <div class="service-item">
+      <div class="service-photo">
+        <img src="Blockchain_And_Crypto_Application.jpg" alt="Blockchain And Crypto Application" />
+        <div class="photo-overlay">
+          <span class="service-name">Blockchain And Crypto Application</span>
+          <a href="#service5" class="learn-more-btn">Learn More</a>
+        </div>
+      </div>
+      <div id="service5" class="service-info">
+        <h3 class="course-title">Blockchain And Crypto Application <span class="course-price">$399</span></h3>
+        <p class="course-desc">Explore blockchain technology and its applications in crypto and web development.</p>
+        <h4>What you'll learn:</h4>
+        <ul>
+          <li>Blockchain fundamentals</li>
+          <li>Smart contracts</li>
+          <li>Web3 integrations</li>
+        </ul>
+        <p class="course-duration">Duration: 4 months, 2 hours/week</p>
+        <a href="signin.html" class="advance-btn">Advance Your Career</a>
+      </div>
+    </div>
+
+    <div class="service-item">
+      <div class="service-photo">
+        <img src="Digital_Marketing.jpg" alt="Digital Marketing" />
+        <div class="photo-overlay">
+          <span class="service-name">Digital Marketing</span>
+          <a href="#service6" class="learn-more-btn">Learn More</a>
+        </div>
+      </div>
+      <div id="service6" class="service-info">
+        <h3 class="course-title">Digital Marketing <span class="course-price">$179</span></h3>
+        <p class="course-desc">Learn marketing strategies to grow your online presence and web projects.</p>
+        <h4>What you'll learn:</h4>
+        <ul>
+          <li>SEO & social media strategies</li>
+          <li>Advertising campaigns</li>
+          <li>Analytics and conversion tracking</li>
+        </ul>
+        <p class="course-duration">Duration: 3 months, 1-2 hours/week</p>
+        <a href="signin.html" class="advance-btn">Advance Your Career</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonial" class="testimonial-section" style="padding:60px 20px;">
+  <div class="about-title-wrapper">
+    <h2 class="about-title" style="text-align:center; margin-bottom:20px;">What People Say?</h2>
+  </div>
+  <p style="text-align:center; font-size:1rem; color:#555; margin-bottom:40px;">
+    Voices from clients, students, collaborators, and friends who have experienced my work.
+  </p>
+
+  <div class="testimonial-box">
+    <div class="testimonial-top">
+      <div class="testimonial-title">
+        <span class="comment-icon">💬</span>
+        <span>Testimonials</span>
+      </div>
+      <div class="add-testimonial-btn">
+        <button id="open-popup">+ Add Testimonial</button>
+      </div>
+    </div>
+
+    <div id="testimonial-list" class="testimonial-list">
+      <div class="testimonial-item">
+        <span class="delete-btn">❌</span>
+        <span class="quote">“</span>
+        <p class="testimonial-text">
+          Hnin Yadanar Aung is a fantastic web developer. Her work on the portfolio website was professional and creative.
+        </p>
+        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+        <div class="testimonial-account">
+          <div class="avatar">JO</div>
+          <div class="account-info">
+            <div class="name">Johan</div>
+            <div class="position">Designer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="add-testimonial-popup" class="add-testimonial-popup">
+  <div class="add-testimonial-content">
+    <h3>Share Your Testimonial</h3>
+    <form id="testimonial-form">
+      <input type="text" id="fullName" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="position" placeholder="Position" required>
+      <textarea id="testimonialText" placeholder="Your Testimonial" required></textarea>
+      <div class="form-buttons">
+        <button type="button" id="cancel-btn">Cancel</button>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<section id="contact" class="contact-section">
+
+    <h2 class="about-title">Get In Touch</h2>
+    <p class="contact-subtitle">
+        Have a project in mind? Want to advance your career? 
+        Let’s discuss how we can bring your vision to life.
+    </p>
+
+    <div class="contact-wrapper">
+        <div class="contact-left">
+            <div class="profile-block">
+                <img src="sleepy_rabbit.jpg" class="contact-photo">
+
+                <h3 class="contact-name">Hnin Yadanar Aung</h3>
+                <p class="contact-position">Web Developer</p>
+            </div>
+
+            <div class="info-box">
+                <i class="fa-solid fa-envelope info-icon"></i>
+                <div class="info-text">
+                    <h4>Email</h4>
+                    <p>hninyadanaraung731@gmail.com</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <i class="fa-solid fa-phone info-icon"></i>
+                <div class="info-text">
+                    <h4>Phone</h4>
+                    <p>+95 9 403 060 731</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <i class="fa-solid fa-location-dot info-icon"></i>
+                <div class="info-text">
+                    <h4>Location</h4>
+                    <p>Mandalay, Myanmar</p>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="contact-right">
+            <div class="form-main-box">
+
+                <form class="contact-form">
+                    <input type="text" placeholder="Name">
+                    <input type="email" placeholder="Email">
+                    <input type="text" placeholder="Subject">
+                    <textarea rows="4" placeholder="Message"></textarea>
+
+                    <button class="btn-3d">Send Message</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<footer class="footer">
+  <div class="footer-socials">
+    <a href="https://www.facebook.com/yourprofile" target="_blank" class="social-link">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://twitter.com/yourprofile" target="_blank" class="social-link">
+      <i class="fab fa-twitter"></i>
+    </a>
+    <a href="https://instagram.com/yourprofile" target="_blank" class="social-link">
+      <i class="fab fa-instagram"></i>
+    </a>
+  </div>
+
+  <p class="footer-text">© 2025 Hnin Yadanar Aung. All rights reserved.</p>
+</footer>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+const modeToggle = document.getElementById("modeToggle");
+const modeBox = document.getElementById("modeBox");
+const dayBtn = document.getElementById("dayMode");
+const nightBtn = document.getElementById("nightMode");
+const readingBtn = document.getElementById("readingMode");
+const navLinks = document.querySelectorAll(".nav-link");
+const port = document.querySelector(".port");
+const folio = document.querySelector(".folio");
+
+modeToggle.addEventListener("click", (e) => {
+  e.stopPropagation();
+  modeBox.style.display = modeBox.style.display === "flex" ? "none" : "flex";
+});
+
+document.addEventListener("click", (e) => {
+  if (!modeBox.contains(e.target) && !modeToggle.contains(e.target)) {
+    modeBox.style.display = "none";
+  }
+});
+
+function setNavColor(color) {
+  navLinks.forEach(link => link.style.color = color);
+  port.style.webkitTextStroke = `1.2px ${color}`;
+  folio.style.color = color;
+}
+
+dayBtn.addEventListener("click", () => {
+  document.body.style.background = "var(--bg-day)";
+  setNavColor("var(--sapphire-dark)");
+  modeBox.style.display = "none";
+});
+
+nightBtn.addEventListener("click", () => {
+  document.body.style.background = "var(--bg-night)";
+  setNavColor("#f4f4f4");
+  modeBox.style.display = "none";
+});
+
+readingBtn.addEventListener("click", () => {
+  document.body.style.background = "var(--bg-reading)";
+  setNavColor("#5a4630");
+  modeBox.style.display = "none";
+});
+
+const typingText = document.getElementById('typingText');
+const text = "Web Developer";
+let idx = 0;
+let forward = true;
+
+function typeLoop() {
+  if(forward){
+    typingText.textContent = text.slice(0, idx);
+    idx++;
+    if(idx > text.length) forward = false;
+  } else {
+    idx--;
+    typingText.textContent = text.slice(0, idx);
+    if(idx === 0) forward = true;
+  }
+  setTimeout(typeLoop, 150);
+}
+typeLoop();
+
+const aboutSection = document.querySelector('.about-container');
+
+window.addEventListener('scroll', () => {
+  const rect = aboutSection.getBoundingClientRect();
+  if (rect.top < window.innerHeight - 150) {
+    aboutSection.classList.add('visible');
+  }
+});
+
+const techInfoBox = document.getElementById('techInfoBox');
+const techTitle = document.getElementById('techTitle');
+const techDesc = document.getElementById('techDesc');
+
+const techInfo = {
+  html: { title: "ABOUT HTML", desc: "HTML structures every webpage. It defines the layout and elements that bring content to life." },
+  css: { title: "ABOUT CSS", desc: "CSS styles web pages, adding color, spacing, and modern layouts to enhance design." },
+  js: { title: "ABOUT JavaScript", desc: "JavaScript makes your website interactive, dynamic, and responsive." },
+  bootstrap: { title: "ABOUT Bootstrap", desc: "Bootstrap is a front-end framework for fast and responsive web design." },
+  c: { title: "ABOUT C", desc: "C is a foundational programming language — fast, efficient, and close to hardware." },
+  cpp: { title: "ABOUT C++", desc: "C++ expands C with object-oriented features for complex applications and performance." },
+  csharp: { title: "ABOUT C#", desc: "C# is versatile for developing modern Windows, web, and game applications." },
+  python: { title: "ABOUT Python", desc: "Python is simple yet powerful — ideal for AI, data, and automation." },
+  xampp: { title: "ABOUT XAMPP", desc: "XAMPP is a local server environment for running PHP, MySQL, and Apache projects." },
+  php: { title: "ABOUT PHP", desc: "PHP powers server-side logic, connecting front-end with backend databases." }
+};
+
+document.querySelectorAll('.tech-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const key = item.dataset.tech;
+    techTitle.textContent = techInfo[key].title;
+    techDesc.textContent = techInfo[key].desc;
+    techInfoBox.style.display = "block";
+    setTimeout(() => { techInfoBox.style.display = "none"; }, 5000);
+  });
+});
+
+const openPopupBtn = document.getElementById('open-popup');
+const popup = document.getElementById('add-testimonial-popup');
+const cancelBtn = document.getElementById('cancel-btn');
+const form = document.getElementById('testimonial-form');
+const testimonialList = document.getElementById('testimonial-list');
+
+openPopupBtn.addEventListener('click', () => {
+  popup.style.display = 'flex';
+});
+
+cancelBtn.addEventListener('click', () => {
+  popup.style.display = 'none';
+  form.reset();
+});
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const fullName = document.getElementById('fullName').value;
+  const position = document.getElementById('position').value;
+  const text = document.getElementById('testimonialText').value;
+
+  const newTestimonial = document.createElement('div');
+  newTestimonial.classList.add('testimonial-item');
+  newTestimonial.innerHTML = `
+    <span class="delete-btn">🗑️</span>
+    <span class="quote">“</span>
+    <p class="testimonial-text">${text}</p>
+    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+    <div class="testimonial-account">
+      <div class="avatar">${fullName.slice(0,2).toUpperCase()}</div>
+      <div class="account-info">
+        <div class="name">${fullName}</div>
+        <div class="position">${position}</div>
+      </div>
+    </div>
+  `;
+
+  newTestimonial.querySelector('.delete-btn').addEventListener('click', () => {
+    newTestimonial.remove();
+  });
+
+  testimonialList.appendChild(newTestimonial);
+  popup.style.display = 'none';
+  form.reset();
+
+  newTestimonial.scrollIntoView({ behavior: 'smooth' });
+});
+
+
+document.querySelectorAll('.testimonial-item .delete-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    btn.parentElement.remove();
+  });
+});
+</script>
+</body>
+</html>
